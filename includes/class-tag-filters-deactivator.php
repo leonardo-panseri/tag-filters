@@ -30,7 +30,7 @@ class Tag_Filters_Deactivator
      */
     public static function deactivate()
     {
-        delete_option('');
+        delete_option('tagfilters_page_ids');
     }
 
 }
