@@ -131,8 +131,8 @@ class Tag_Filters_Admin
      * @param WP_Post $post The post that is being edited
      * @since    1.0.0
      */
-    public function load_metabox_partial(WP_Post $post) {
-        extract(array('post', $post));
+    public function load_meta_box_partial(WP_Post $post) {
+        extract(array('post', $post), EXTR_PREFIX_ALL, 'tagfilters');
         include plugin_dir_path(__FILE__) . 'partials/tag-filters-metabox-display.php';
     }
 
@@ -141,14 +141,24 @@ class Tag_Filters_Admin
      *
      * @since    1.0.0
      */
-    public function register_custom_metabox() {
+    public function register_custom_meta_box() {
         add_meta_box(
             'tagfilters-page-meta-box',
             'TagFilters Settings',
-            array($this, 'load_metabox_partial'),
+            array($this, 'load_meta_box_partial'),
             'tagfilters_page',
             'normal'
         );
+    }
+
+    /**
+     * Saves the custom meta box data to post meta when saving a TagFilters Page.
+     *
+     * @param int $post_id The ID of the post
+     * @param WP_Post $post The object representing the post
+     */
+    public function save_custom_meta_box(int $post_id, WP_Post $post) {
+
     }
 
 }
