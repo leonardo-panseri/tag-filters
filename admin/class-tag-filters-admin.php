@@ -131,11 +131,9 @@ class Tag_Filters_Admin
     /**
      * Load the partial for rendering of the custom meta box in TagFilters Page editor.
      *
-     * @param WP_Post $post The post that is being edited
      * @since    1.0.0
      */
-    public function load_meta_box_partial(WP_Post $post) {
-        extract(array('post', $post), EXTR_PREFIX_ALL, 'tagfilters');
+    public function load_meta_box_partial() {
         include plugin_dir_path(__FILE__) . 'partials/tag-filters-metabox-display.php';
     }
 
@@ -161,7 +159,7 @@ class Tag_Filters_Admin
      * @param WP_Post $post The object representing the post
      */
     public function save_custom_meta_box(int $post_id, WP_Post $post) {
-
+        error_log(json_encode($_POST));
     }
 
 }

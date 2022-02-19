@@ -3,18 +3,6 @@
 
     // On Document ready
     $(function() {
-        // Initialize an object mapping tag keys to their names and a variable that represents if the tag key is selected
-        const tags = {}
-        $("#tagfilters-available-tags option").each((id, elem) => {
-            tags[elem.value] = {
-                used: false,
-                name: elem.innerText
-            };
-        });
-
-        // Gets the select element used to add new tags to the list
-        const selectTag = document.getElementById('tagfilters-available-tags');
-
         // Function that updates options of the select element
         const updateOptions = function () {
             // New list of options, every option is represented as an object
@@ -38,6 +26,19 @@
                 }));
             })
         }
+
+        // Initialize an object mapping tag keys to their names and a variable that represents if the tag key is selected
+        const tags = {}
+        $("#tagfilters-available-tags option").each((id, elem) => {
+            tags[elem.value] = {
+                used: elem.dataset.used === 'true',
+                name: elem.innerText
+            };
+        });
+        updateOptions();
+
+        // Gets the select element used to add new tags to the list
+        const selectTag = document.getElementById('tagfilters-available-tags');
 
         // Register event listener for click on the tag add button
         $("#tagfilters-tags-add-btn").click(function () {
