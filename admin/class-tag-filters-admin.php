@@ -55,6 +55,26 @@ class Tag_Filters_Admin
     }
 
     /**
+     * Register the TagFilters Page custom post type.
+     *
+     * @since    1.0.0
+     */
+    public function register_tagfilters_post_type() {
+        register_post_type('tagfilters_page', array(
+            'label' => 'TagFilters Pages',
+            'description' => 'Pages where a post category can be filtered by tags',
+            'public' => true,
+            'hierarchical' => true,
+            'show_in_rest' => true,
+            'show_in_menu' => 'edit.php?post_type=page',
+            'supports' => array('title', 'editor', 'page-attributes', 'thumbnail', 'custom-fields'),
+            'rewrite' => array( 'slug' => 'tagfilters' )
+        ));
+
+        flush_rewrite_rules();
+    }
+
+    /**
      * Register the stylesheets for the admin area.
      *
      * @since    1.0.0
