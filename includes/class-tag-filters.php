@@ -78,6 +78,7 @@ class Tag_Filters
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
+        $this->define_global_hooks();
 
     }
 
@@ -157,9 +158,10 @@ class Tag_Filters
 
         $plugin_admin = new Tag_Filters_Admin($this->get_plugin_name(), $this->get_version());
 
-        /* $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts'); */
-        $this->loader->add_action('admin_menu', $plugin_admin, 'register_admin_menu');
+        /* $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles'); */
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+        // $this->loader->add_action('admin_menu', $plugin_admin, 'register_admin_menu');
+        $this->loader->add_action('add_meta_boxes', $plugin_admin, 'register_custom_metabox');
 
     }
 
@@ -179,6 +181,26 @@ class Tag_Filters
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
     }
+
+    private function define_global_hooks() {
+        $this->loader->add_action('init', $this, 'register_tagfilters_post_type');
+    }
+
+    public function register_tagfilters_post_type() {
+        register_post_type('tagfilters_page', array(
+            'label' => 'TagFilters Pages',
+            'description' => 'Pages where a post category can be filtered by tags',
+            'public' => true,
+            'hierarchical' => true,
+            'show_in_rest' => true,
+            'show_in_menu' => 'edit.php?post_type=page',
+            'supports' => array('title', 'editor', 'page-attributes', 'thumbnail', 'custom-fields'),
+            'rewrite' => array( 'slug' => 'tagfilters' )
+        ));
+
+        flush_rewrite_rules();
+    }
+
 
     /**
      * Run the loader to execute all of the hooks with WordPress.

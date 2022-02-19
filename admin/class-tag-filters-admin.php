@@ -83,23 +83,12 @@ class Tag_Filters_Admin
      *
      * @since    1.0.0
      */
-    public function enqueue_scripts()
+    public function enqueue_scripts($hook)
     {
-
-        /**
-         * This function is provided for demonstration purposes only.
-         *
-         * An instance of this class should be passed to the run() function
-         * defined in Plugin_Name_Loader as all of the hooks are defined
-         * in that particular class.
-         *
-         * The Plugin_Name_Loader will then create the relationship
-         * between the defined hooks and the functions defined in this
-         * class.
-         */
-
+        if('settings_page_tagfilters' != $hook) {
+            return;
+        }
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tag-filters-admin.js', array('jquery'), $this->version);
-
     }
 
     public function load_admin_partial() {
@@ -114,6 +103,14 @@ class Tag_Filters_Admin
             'tagfilters',
             array($this, 'load_admin_partial')
         );
+    }
+
+    public function load_metabox_partial() {
+        include plugin_dir_path(__FILE__) . 'partials/tag-filters-metabox-display.php';
+    }
+
+    public function register_custom_metabox() {
+
     }
 
 }

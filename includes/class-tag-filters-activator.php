@@ -30,7 +30,7 @@ class Tag_Filters_Activator
      */
     public static function activate()
     {
-        add_option('tagfilters_page_ids', array(5, 8));
+
     }
 
 }
