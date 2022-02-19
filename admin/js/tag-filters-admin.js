@@ -49,7 +49,7 @@
             if(!$(`#${inputId}`).length) {
                 // Appends a new hidden input element to the meta box, php will interpret this as an array
                 // of integers in the POST request, thanks to the square brackets in the name field
-                metaBox.append(`<input id="${inputId}" type="hidden" name="selected_tags[]" value="${value}">`);
+                metaBox.append(`<input id="${inputId}" type="hidden" name="tagfilters_selected_tags[]" value="${value}">`);
             }
         }
 

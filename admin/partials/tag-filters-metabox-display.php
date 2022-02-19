@@ -13,7 +13,7 @@
 <div id="tagfilters-meta-box">
     <label>
         Category
-        <select name="category">
+        <select name="tagfilters_category">
             <?php
             $tagfilters_categories = get_categories(array('hide_empty'=>false));
             $tagfilters_selected_category = get_post_meta(get_the_ID(), 'tagfilters_category', true);
@@ -28,7 +28,7 @@
     <br/>
     <label>
         Tags
-        <select name="tags" id="tagfilters-available-tags">
+        <select id="tagfilters-available-tags">
             <?php
             $tagfilters_tags = get_tags(array('hide_empty'=>false));
             $tagfilters_selected_tags = get_post_meta(get_the_ID(), 'tagfilters_tags');
