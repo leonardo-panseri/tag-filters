@@ -8,10 +8,9 @@
  * @package    Tag_Filters
  * @subpackage Tag_Filters/admin/partials
  */
-print_r(get_current_screen());
 ?>
 
-<div>
+<div id="tagfilters-meta-box">
     <label>
         Category
         <select name="category">

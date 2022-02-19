@@ -105,7 +105,10 @@ class Tag_Filters_Admin
      */
     public function enqueue_scripts($hook)
     {
-        if('settings_page_tagfilters' != $hook) {
+        if('post.php' != $hook && 'post-new.php' != $hook) {
+            return;
+        }
+        if('tagfilters_page' != get_post_type()) {
             return;
         }
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tag-filters-admin.js', array('jquery'), $this->version);
