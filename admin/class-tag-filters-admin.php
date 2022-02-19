@@ -125,12 +125,30 @@ class Tag_Filters_Admin
         );
     }
 
-    public function load_metabox_partial() {
+    /**
+     * Load the partial for rendering of the custom meta box in TagFilters Page editor.
+     *
+     * @param WP_Post $post The post that is being edited
+     * @since    1.0.0
+     */
+    public function load_metabox_partial(WP_Post $post) {
+        extract(array('post', $post));
         include plugin_dir_path(__FILE__) . 'partials/tag-filters-metabox-display.php';
     }
 
+    /**
+     * Register the custom meta box for the TagFilters Page editor.
+     *
+     * @since    1.0.0
+     */
     public function register_custom_metabox() {
-
+        add_meta_box(
+            'tagfilters-page-meta-box',
+            'TagFilters Settings',
+            array($this, 'load_metabox_partial'),
+            'tagfilters_page',
+            'normal'
+        );
     }
 
 }
