@@ -170,9 +170,6 @@ class Tag_Filters_Admin
         if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
             return $post_id;
 
-        if('tagfilters_page' != $post->post_type)
-            return $post_id;
-
         if(!isset($_POST['tagfilters_category'])
             || !isset($_POST['tagfilters_selected_tags']))
             return $post_id;
@@ -183,8 +180,8 @@ class Tag_Filters_Admin
         if(!$this->validate_metabox_data($category_id, $selected_tags_ids))
             return $post_id;
 
-        add_post_meta($post_id, '_tagfilters_category', $category_id);
-        add_post_meta($post_id, '_tagfilters_tags', $selected_tags_ids);
+        update_post_meta($post_id, '_tagfilters_category', $category_id);
+        update_post_meta($post_id, '_tagfilters_tags', $selected_tags_ids);
         return $post_id;
     }
 

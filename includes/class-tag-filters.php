@@ -158,7 +158,7 @@ class Tag_Filters
         // $this->loader->add_action('admin_menu', $plugin_admin, 'register_admin_menu');
 
         $this->loader->add_action('add_meta_boxes', $plugin_admin, 'register_custom_meta_box');
-        $this->loader->add_action('save_post', $plugin_admin, 'save_custom_meta_box', 10, 2);
+        $this->loader->add_action('save_post_tagfilters_page', $plugin_admin, 'save_custom_meta_box', 10, 2);
     }
 
     /**
