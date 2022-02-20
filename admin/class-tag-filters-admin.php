@@ -158,8 +158,44 @@ class Tag_Filters_Admin
      * @param int $post_id The ID of the post
      * @param WP_Post $post The object representing the post
      */
-    public function save_custom_meta_box(int $post_id, WP_Post $post) {
-        error_log(json_encode($_POST));
+    public function save_custom_meta_box(int $post_id, WP_Post $post): int
+    {
+        if(!current_user_can('edit_post', $post_id))
+            return $post_id;
+
+        if(!isset($_POST['_tagfilters_metabox_nonce'])
+            || !wp_verify_nonce($_POST['_tagfilters_metabox_nonce'], 'tagfilters_metabox_page_save'))
+            return $post_id;
+
+        if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+            return $post_id;
+
+        if('tagfilters_page' != $post->post_type)
+            return $post_id;
+
+        if(!isset($_POST['tagfilters_category'])
+            || !isset($_POST['tagfilters_selected_tags']))
+            return $post_id;
+
+        $category_id = $_POST['tagfilters_category'];
+        $selected_tags_ids = $_POST['tagfilters_selected_tags'];
+
+        if(!$this->validate_metabox_data($category_id, $selected_tags_ids))
+            return $post_id;
+
+        add_post_meta($post_id, '_tagfilters_category', $category_id);
+        add_post_meta($post_id, '_tagfilters_tags', $selected_tags_ids);
+        return $post_id;
     }
 
+    private function validate_metabox_data($category_id, $selected_tags_ids): bool
+    {
+        if(!is_numeric($category_id)) return false;
+        if(!is_array($selected_tags_ids)) return false;
+        foreach ($selected_tags_ids as $tag) {
+            if(!is_numeric($tag)) return false;
+        }
+
+        return true;
+    }
 }

@@ -11,12 +11,13 @@
 ?>
 
 <div id="tagfilters-meta-box">
+    <?php wp_nonce_field( 'tagfilters_metabox_page_save', '_tagfilters_metabox_nonce' ); ?>
     <label>
         Category
         <select name="tagfilters_category">
             <?php
             $tagfilters_categories = get_categories(array('hide_empty'=>false));
-            $tagfilters_selected_category = get_post_meta(get_the_ID(), 'tagfilters_category', true);
+            $tagfilters_selected_category = get_post_meta(get_the_ID(), '_tagfilters_category', true);
             foreach ($tagfilters_categories as $tagfilters_category) {
                 echo "<option value='{$tagfilters_category->term_id}'" .
                     ($tagfilters_selected_category == strval($tagfilters_category->term_id) ? " selected" : "") .
@@ -31,7 +32,8 @@
         <select id="tagfilters-available-tags">
             <?php
             $tagfilters_tags = get_tags(array('hide_empty'=>false));
-            $tagfilters_selected_tags = get_post_meta(get_the_ID(), 'tagfilters_tags');
+            $tagfilters_selected_tags = get_post_meta(get_the_ID(), '_tagfilters_tags', true);
+            if($tagfilters_selected_tags == '') $tagfilters_selected_tags = array();
             foreach ($tagfilters_tags as $tagfilters_tag) {
                 echo "<option value='{$tagfilters_tag->term_id}' data-used='" .
                     (in_array(strval($tagfilters_tag->term_id), $tagfilters_selected_tags) ? 'true' : 'false') .
