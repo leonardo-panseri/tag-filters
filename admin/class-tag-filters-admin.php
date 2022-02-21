@@ -81,13 +81,29 @@ class Tag_Filters_Admin
         register_post_meta('tagfilters_page', '_tagfilters_categories', array(
             'type' => 'array',
             'single' => true,
-            'show_in_rest' => true,
+            'show_in_rest' => array(
+                'schema' => array(
+                    'type'  => 'array',
+                    'default' => array(),
+                    'items' => array(
+                        'type' => 'string',
+                    ),
+                ),
+            ),
             'default' => array()
         ));
         register_post_meta('tagfilters_page', '_tagfilters_tags', array(
             'type' => 'array',
             'single' => true,
-            'show_in_rest' => true,
+            'show_in_rest' => array(
+                'schema' => array(
+                    'type'  => 'array',
+                    'default' => array(),
+                    'items' => array(
+                        'type' => 'string',
+                    ),
+                ),
+            ),
             'default' => array()
         ));
 
