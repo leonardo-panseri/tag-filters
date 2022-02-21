@@ -147,24 +147,27 @@ class Tag_Filters_Admin
         if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
             return $post_id;
 
-        if(!isset($_POST['tagfilters_category'])
+        if(!isset($_POST['tagfilters_categories'])
             || !isset($_POST['tagfilters_selected_tags']))
             return $post_id;
 
-        $category_id = $_POST['tagfilters_category'];
+        $categories_ids = $_POST['tagfilters_categories'];
         $selected_tags_ids = $_POST['tagfilters_selected_tags'];
 
-        if(!$this->validate_metabox_data($category_id, $selected_tags_ids))
+        if(!$this->validate_metabox_data($categories_ids, $selected_tags_ids))
             return $post_id;
 
-        update_post_meta($post_id, '_tagfilters_category', $category_id);
+        update_post_meta($post_id, '_tagfilters_categories', $categories_ids);
         update_post_meta($post_id, '_tagfilters_tags', $selected_tags_ids);
         return $post_id;
     }
 
-    private function validate_metabox_data($category_id, $selected_tags_ids): bool
+    private function validate_metabox_data($categories_ids, $selected_tags_ids): bool
     {
-        if(!is_numeric($category_id)) return false;
+        if(!is_array($categories_ids)) return false;
+        foreach ($categories_ids as $category) {
+            if(!is_numeric($category)) return false;
+        }
         if(!is_array($selected_tags_ids)) return false;
         foreach ($selected_tags_ids as $tag) {
             if(!is_numeric($tag)) return false;

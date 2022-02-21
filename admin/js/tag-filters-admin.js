@@ -4,7 +4,7 @@
     // On DOM loaded
     $(function() {
         // Object mapping tag keys to their names and a variable that represents if the tag key is selected
-        const tags = {}
+        /*const tags = {}
 
         const metaBox = $('#tagfilters-meta-box');
         const displayList = $('#tagfilters-tags-list');
@@ -112,7 +112,7 @@
             }
 
             update();
-        });
+        });*/
     });
 
 })(jQuery);
