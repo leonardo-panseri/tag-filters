@@ -22,6 +22,7 @@
         <?php
         $tagfilters_categories = get_categories(array('hide_empty'=>false));
         $tagfilters_selected_categories = get_post_meta(get_the_ID(), '_tagfilters_categories', true);
+        if($tagfilters_selected_categories == '') $tagfilters_selected_categories = array();
         foreach ($tagfilters_categories as $tagfilters_category) {
             $tagfilters_category_checked_string =
                 in_array(strval($tagfilters_category->term_id), $tagfilters_selected_categories) ? 'checked' : '';
@@ -46,7 +47,7 @@
                 in_array(strval($tagfilters_tag->term_id), $tagfilters_selected_tags) ? 'checked' : '';
             echo <<<END
                 <label>
-                    <input name="tagfilters_selected_tags[]" value="$tagfilters_tag->term_id" $tagfilters_tag_checked_string>
+                    <input type="checkbox" name="tagfilters_selected_tags[]" value="$tagfilters_tag->term_id" $tagfilters_tag_checked_string>
                     $tagfilters_tag->name
                 </label>
                 END;
