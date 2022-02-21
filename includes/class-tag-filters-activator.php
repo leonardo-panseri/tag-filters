@@ -30,7 +30,6 @@ class Tag_Filters_Activator
      */
     public static function activate()
     {
-
     }
 
 }

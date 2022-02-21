@@ -48,14 +48,18 @@ class Tag_Filters_Admin
      */
     public function __construct(string $plugin_name, string $version)
     {
-
         $this->plugin_name = $plugin_name;
         $this->version = $version;
 
+        add_shortcode('tagfilters-container', 'load_default_container_partial');
     }
 
     private function load_default_container_partial() : string {
-        return include plugin_dir_path(__FILE__) . 'partials/tag-filters-default-container.php';
+        ob_start();
+        include plugin_dir_path(__FILE__) . 'partials/tag-filters-default-container.php';
+        $output = ob_get_contents();
+        ob_end_clean();
+        return $output;
     }
 
     /**
@@ -73,8 +77,8 @@ class Tag_Filters_Admin
             'show_in_menu' => 'edit.php?post_type=page',
             'supports' => array('title', 'editor', 'page-attributes', 'thumbnail', 'custom-fields'),
             'rewrite' => array( 'slug' => 'tagfilters' ),
-            'template' => array(array('core/html', array(
-                'content'=> $this->load_default_container_partial()
+            'template' => array(array('core/shortcode', array(
+                'text'=> '[tagfilters-container]'
             )))
         ));
 
