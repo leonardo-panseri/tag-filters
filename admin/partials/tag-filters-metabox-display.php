@@ -22,7 +22,6 @@
         <?php
         $tagfilters_categories = get_categories(array('hide_empty'=>false));
         $tagfilters_selected_categories = get_post_meta(get_the_ID(), '_tagfilters_categories', true);
-        if($tagfilters_selected_categories == '') $tagfilters_selected_categories = array();
         foreach ($tagfilters_categories as $tagfilters_category) {
             $tagfilters_category_checked_string =
                 in_array(strval($tagfilters_category->term_id), $tagfilters_selected_categories) ? 'checked' : '';
@@ -35,13 +34,12 @@
         }
         ?>
     </fieldset>
-
+    <br/>
     <fieldset id="tagfilters-tags">
         <legend>Tags</legend>
         <?php
         $tagfilters_tags = get_tags(array('hide_empty'=>false));
         $tagfilters_selected_tags = get_post_meta(get_the_ID(), '_tagfilters_tags', true);
-        if($tagfilters_selected_tags == '') $tagfilters_selected_tags = array();
         foreach ($tagfilters_tags as $tagfilters_tag) {
             $tagfilters_tag_checked_string =
                 in_array(strval($tagfilters_tag->term_id), $tagfilters_selected_tags) ? 'checked' : '';

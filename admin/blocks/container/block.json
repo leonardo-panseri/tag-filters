@@ -1,0 +1,8 @@
+{
+  "apiVersion": 2,
+  "title": "TagFilters Container",
+  "name": "tagfilters/container",
+  "category": "layout",
+  "icon": "editor-table",
+  "editorScript": "file:./block.js"
+}
