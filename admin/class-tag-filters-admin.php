@@ -73,9 +73,9 @@ class Tag_Filters_Admin
             'show_in_menu' => 'edit.php?post_type=page',
             'supports' => array('title', 'editor', 'page-attributes', 'thumbnail', 'custom-fields'),
             'rewrite' => array( 'slug' => 'tagfilters' ),
-            'template' => array(array('core/html'), array(
+            'template' => array(array('core/html', array(
                 'content'=> $this->load_default_container_partial()
-            ))
+            )))
         ));
 
         register_post_meta('tagfilters_page', '_tagfilters_categories', array(
