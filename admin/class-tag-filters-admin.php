@@ -51,10 +51,10 @@ class Tag_Filters_Admin
         $this->plugin_name = $plugin_name;
         $this->version = $version;
 
-        add_shortcode('tagfilters-container', 'load_default_container_partial');
+        add_shortcode('tagfilters-container', array($this, 'load_default_container_partial'));
     }
 
-    private function load_default_container_partial() : string {
+    public function load_default_container_partial() : string {
         ob_start();
         include plugin_dir_path(__FILE__) . 'partials/tag-filters-default-container.php';
         $output = ob_get_contents();

@@ -54,18 +54,11 @@ class Tag_Filters_Public
 
     }
 
-    /**
-     * Register the stylesheets for the public-facing side of the site.
-     *
-     * @since    1.0.0
-     */
-    public function enqueue_styles()
-    {
+    public function include_template_file($template) {
+        if(get_post_type() != 'tagfilters_page')
+            return $template;
 
-        if ($this->is_tagfilters_page()) {
-            wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tag-filters-public.css', array(), $this->version);
-        }
-
+        return plugin_dir_path(__FILE__) . 'partials/tag-filters-page-single.php';
     }
 
     /**
@@ -78,6 +71,7 @@ class Tag_Filters_Public
 
         if ($this->is_tagfilters_page()) {
             wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tag-filters-public.js', array('jquery'), $this->version);
+            wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tag-filters-public.css', array(), $this->version);
         }
 
     }
