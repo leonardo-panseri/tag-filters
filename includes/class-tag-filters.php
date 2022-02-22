@@ -148,7 +148,7 @@ class Tag_Filters
      * @access   private
      */
     public function register_block_types() {
-        register_block_type(plugin_dir_path(dirname(__FILE__)) . 'blocks/filter-controls/build');
+        register_block_type(plugin_dir_path(dirname(__FILE__)) . 'blocks/filter-controls');
     }
 
     /**
