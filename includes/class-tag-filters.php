@@ -76,7 +76,7 @@ class Tag_Filters
 
         $this->load_dependencies();
         $this->set_locale();
-        $this->register_block_types();
+        $this->loader->add_action('init', $this, 'register_block_types');
         $this->define_admin_hooks();
         $this->define_public_hooks();
     }
@@ -147,7 +147,7 @@ class Tag_Filters
      * @since    1.0.0
      * @access   private
      */
-    private function register_block_types() {
+    public function register_block_types() {
         register_block_type(plugin_dir_path(dirname(__FILE__)) . 'blocks/filter-controls/build');
     }
 
