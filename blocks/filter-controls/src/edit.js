@@ -31,11 +31,11 @@ import './editor.scss';
  */
 export default function Edit() {
 	return (
-		<p {...useBlockProps()}>
+		<div {...useBlockProps()}>
 			{__(
-				'TagFilters Filters Bar – hello from the editor!',
+				'TagFilters Filter Controls',
 				'tag-filters'
 			)}
-		</p>
+		</div>
 	);
 }

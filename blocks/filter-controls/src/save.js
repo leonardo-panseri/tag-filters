@@ -23,12 +23,14 @@ import { useBlockProps } from '@wordpress/block-editor';
  * @return {WPElement} Element to render.
  */
 export default function save() {
+	const meta = wp.data.select('core/editor').getEditedPostAttribute('meta');
+	console.log(meta);
 	return (
-		<p {...useBlockProps.save()}>
+		<div {...useBlockProps.save()}>
 			{__(
 				'TagFilters Filters Bar – hello from the saved content!',
 				'tag-filters'
 			)}
-		</p>
+		</div>
 	);
 }
