@@ -58,7 +58,7 @@ class Tag_Filters_Public
         if(get_post_type() != 'tagfilters_page')
             return $template;
 
-        return plugin_dir_path(__FILE__) . 'partials/tag-filters-page-single.php';
+        return plugin_dir_path(__FILE__) . 'partials/tag-filters-page-single.html';
     }
 
     /**

@@ -1,0 +1,20 @@
+{
+  "name": "tag-filters",
+  "version": "1.0.0",
+  "description": "TagFilters adds custom pages where posts can be filtered by tag.",
+  "author": "Leonardo Panseri",
+  "license": "GPL-2.0-or-later",
+  "main": "build/index.js",
+  "scripts": {
+    "build:filter-controls": "wp-scripts build blocks/filter-controls/src/index.js --output-path=blocks/filter-controls/build/",
+    "start:filter-controls": "wp-scripts start blocks/filter-controls/src/index.js --output-path=blocks/filter-controls/build/",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^22.0.0"
+  }
+}

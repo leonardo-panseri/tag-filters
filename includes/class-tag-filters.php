@@ -76,6 +76,7 @@ class Tag_Filters
 
         $this->load_dependencies();
         $this->set_locale();
+        $this->register_block_types();
         $this->define_admin_hooks();
         $this->define_public_hooks();
     }
@@ -141,6 +142,16 @@ class Tag_Filters
     }
 
     /**
+     * Register the custom block types that this plugin implements.
+     *
+     * @since    1.0.0
+     * @access   private
+     */
+    private function register_block_types() {
+        register_block_type(plugin_dir_path(dirname(__FILE__)) . 'blocks/filter-controls/build');
+    }
+
+    /**
      * Register all of the hooks related to the admin area functionality
      * of the plugin.
      *
@@ -156,8 +167,8 @@ class Tag_Filters
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
         // $this->loader->add_action('admin_menu', $plugin_admin, 'register_admin_menu');
 
-        $this->loader->add_action('add_meta_boxes', $plugin_admin, 'register_custom_meta_box');
-        $this->loader->add_action('save_post_tagfilters_page', $plugin_admin, 'save_custom_meta_box', 10, 2);
+        $this->loader->add_action('add_meta_boxes', $plugin_admin, 'register_tagfilters_meta_box');
+        $this->loader->add_action('save_post_tagfilters_page', $plugin_admin, 'save_tagfilters_meta_box');
     }
 
     /**

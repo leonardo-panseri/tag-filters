@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "tagfilters/filter-controls",
+	"version": "1.0.0",
+	"title": "TagFilters Filter Controls",
+	"category": "widgets",
+	"icon": "saved",
+	"description": "Filter controls for TagFilters Pages.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "tag-filters",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

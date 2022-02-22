@@ -50,16 +50,6 @@ class Tag_Filters_Admin
     {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
-
-        add_shortcode('tagfilters-container', array($this, 'load_default_container_partial'));
-    }
-
-    public function load_default_container_partial() : string {
-        ob_start();
-        include plugin_dir_path(__FILE__) . 'partials/tag-filters-default-container.php';
-        $output = ob_get_contents();
-        ob_end_clean();
-        return $output;
     }
 
     /**
@@ -77,9 +67,9 @@ class Tag_Filters_Admin
             'show_in_menu' => 'edit.php?post_type=page',
             'supports' => array('title', 'editor', 'page-attributes', 'thumbnail', 'custom-fields'),
             'rewrite' => array( 'slug' => 'tagfilters' ),
-            'template' => array(array('core/shortcode', array(
+            /*'template' => array(array('core/shortcode', array(
                 'text'=> '[tagfilters-container]'
-            )))
+            )))*/
         ));
 
         register_post_meta('tagfilters_page', '_tagfilters_categories', array(
@@ -131,7 +121,7 @@ class Tag_Filters_Admin
         // wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tag-filters-admin.css', array(), $this->version);
     }
 
-    public function load_admin_partial() {
+    /* public function load_admin_partial() {
         include plugin_dir_path(__FILE__) . 'partials/tag-filters-admin-display.php';
     }
 
@@ -143,7 +133,7 @@ class Tag_Filters_Admin
             'tagfilters',
             array($this, 'load_admin_partial')
         );
-    }
+    } */
 
     /**
      * Load the partial for rendering of the custom meta box in TagFilters Page editor.
@@ -159,7 +149,7 @@ class Tag_Filters_Admin
      *
      * @since    1.0.0
      */
-    public function register_custom_meta_box() {
+    public function register_tagfilters_meta_box() {
         add_meta_box(
             'tagfilters-page-meta-box',
             'TagFilters Settings',
@@ -173,9 +163,8 @@ class Tag_Filters_Admin
      * Saves the custom meta box data to post meta when saving a TagFilters Page.
      *
      * @param int $post_id The ID of the post
-     * @param WP_Post $post The object representing the post
      */
-    public function save_custom_meta_box(int $post_id, WP_Post $post): int
+    public function save_tagfilters_meta_box(int $post_id): int
     {
         if(!current_user_can('edit_post', $post_id))
             return $post_id;
